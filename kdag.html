@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KDAG - Beginner Data Analytics Quiz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #222;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            width: 90%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo h1 {
+            color: #ff0000;
+            font-size: 1.5rem;
+            margin-left: 10px;
+        }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            background-color: #ff0000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: bold;
+            border: 2px solid #ff0000;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 15px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px;
+        }
+
+        nav ul li a:hover {
+            color: #ff0000;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: #333;
+        }
+
+        .hero h2 {
+            font-size: 2rem;
+            color: #ff0000;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            max-width: 800px;
+            margin: 0 auto 20px;
+            color: #ddd;
+        }
+
+        /* Quiz Section */
+        .quiz-container {
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            background: #222;
+            border-radius: 5px;
+        }
+
+        .quiz-container h3 {
+            color: #ff0000;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #333;
+            border-radius: 5px;
+        }
+
+        .question h4 {
+            color: #ff9999;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .options {
+            display: block;
+        }
+
+        .option {
+            display: block;
+            padding: 10px;
+            background: #444;
+            border: 1px solid #666;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .option:hover {
+            background: #555;
+        }
+
+        .option.selected {
+            background: #660000;
+            border-color: #ff0000;
+        }
+
+        .submit-btn {
+            display: block;
+            margin: 20px auto 0;
+            padding: 10px 20px;
+            background: #ff0000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background: #cc0000;
+        }
+
+        /* Results Section */
+        .results {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: #333;
+            border-radius: 5px;
+        }
+
+        .results h3 {
+            color: #ff0000;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .score {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #ff9999;
+        }
+
+        .answer-review {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #444;
+            border-radius: 5px;
+        }
+
+        .correct {
+            color: #00ff00;
+        }
+
+        .incorrect {
+            color: #ff0000;
+        }
+
+        /* Feedback Form */
+        .feedback {
+            margin-top: 30px;
+            padding: 20px;
+            background: #222;
+            border-radius: 5px;
+        }
+
+        .feedback h3 {
+            color: #ff0000;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ff9999;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            background: #444;
+            border: 1px solid #666;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #222;
+            padding: 30px 20px;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            width: 90%;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .footer-section {
+            margin-bottom: 20px;
+        }
+
+        .footer-section h3 {
+            color: #ff0000;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p, .footer-section li {
+            color: #ddd;
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #ddd;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: #ff0000;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background: #444;
+            border-radius: 50%;
+        }
+
+        .social-icons a:hover {
+            background: #ff0000;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #444;
+            color: #aaa;
+        }
+        
+        @media (min-width: 768px) {
+            .footer-content {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+            }
+            
+            .options {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-img">KDAG</div>
+                <h1>Kharagpur Data Analytics Group</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Events</a></li>
+                    <li><a href="#">Resources</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h2>BEGINNER DATA ANALYTICS QUIZ</h2>
+        <p>Test your basic knowledge of data analytics concepts</p>
+    </section>
+
+    <!-- Quiz Section -->
+    <section class="quiz-container">
+        <h3>Data Analytics Fundamentals Quiz</h3>
+        <form id="quiz-form">
+            <!-- Question 1 -->
+            <div class="question">
+                <h4>1. What is the primary purpose of data analytics?</h4>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q1" value="a"> To create complex algorithms
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="b"> To extract insights from data
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="c"> To design websites
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="d"> To build computer hardware
+                    </label>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question">
+                <h4>2. Which of these is a common tool used in data analytics?</h4>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q2" value="a"> Microsoft Word
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2" value="b"> Adobe Photoshop
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2" value="c"> Microsoft Excel
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2" value="d"> AutoCAD
+                    </label>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question">
+                <h4>3. What does CSV stand for in data analytics?</h4>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q3" value="a"> Computer System Validation
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="b"> Comma Separated Values
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="c"> Cyber Security Verification
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="d"> Corporate Server Volume
+                    </label>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question">
+                <h4>4. Which type of data would "customer ratings from 1 to 5" be considered?</h4>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q4" value="a"> Categorical data
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q4" value="b"> Numerical data
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q4" value="c"> Text data
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q4" value="d"> Binary data
+                    </label>
+                </div>
+            </div>
+
+            <button type="button" id="submit-btn" class="submit-btn">Submit Answers</button>
+        </form>
+
+        <!-- Results Section -->
+        <div class="results" id="results">
+            <h3>Quiz Results</h3>
+            <div class="score" id="score"></div>
+            
+            <div class="answer-review">
+                <h4>Question 1: What is the primary purpose of data analytics?</h4>
+                <p>Correct answer: <span class="correct">To extract insights from data</span></p>
+                <p id="answer1">Your answer: </p>
+            </div>
+            
+            <div class="answer-review">
+                <h4>Question 2: Which of these is a common tool used in data analytics?</h4>
+                <p>Correct answer: <span class="correct">Microsoft Excel</span></p>
+                <p id="answer2">Your answer: </p>
+            </div>
+            
+            <div class="answer-review">
+                <h4>Question 3: What does CSV stand for in data analytics?</h4>
+                <p>Correct answer: <span class="correct">Comma Separated Values</span></p>
+                <p id="answer3">Your answer: </p>
+            </div>
+            
+            <div class="answer-review">
+                <h4>Question 4: Which type of data would "customer ratings from 1 to 5" be considered?</h4>
+                <p>Correct answer: <span class="correct">Numerical data</span></p>
+                <p id="answer4">Your answer: </p>
+            </div>
+        </div>
+
+        <!-- Feedback Form -->
+        <div class="feedback">
+            <h3>Help Us Improve</h3>
+            <form id="feedback-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" placeholder="Your name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Your email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="experience">Your experience level with data analytics:</label>
+                    <select id="experience">
+                        <option value="">Select your experience</option>
+                        <option value="beginner">Beginner (just starting)</option>
+                        <option value="intermediate">Intermediate (some knowledge)</option>
+                        <option value="advanced">Advanced (comfortable with concepts)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Your Feedback</label>
+                    <textarea id="message" placeholder="What did you think of this quiz?"></textarea>
+                </div>
+                
+                <button type="button" class="submit-btn">Submit Feedback</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Kharagpur Data Analytics Group</h3>
+                <p>The Machine Learning Society at IIT Kharagpur</p>
+                <p>Indian Institute of Technology Kharagpur, India</p>
+            </div>
+            
+            
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/kgpdag"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/kdag.iitkgp/"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/company/kdag/"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <p>Email: kdag@iitkgp.ac.in</p>
+                <p>Join our beginner-friendly workshops!</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Kharagpur Data Analytics Group. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const submitBtn = document.getElementById('submit-btn');
+            const resultsDiv = document.getElementById('results');
+            const scoreDiv = document.getElementById('score');
+            
+            // Correct answers for beginner questions
+            const correctAnswers = {
+                q1: 'b',
+                q2: 'c',
+                q3: 'b',
+                q4: 'b'
+            };
+            
+            // Answer texts
+            const answerTexts = {
+                q1: {
+                    a: 'To create complex algorithms',
+                    b: 'To extract insights from data',
+                    c: 'To design websites',
+                    d: 'To build computer hardware'
+                },
+                q2: {
+                    a: 'Microsoft Word',
+                    b: 'Adobe Photoshop',
+                    c: 'Microsoft Excel',
+                    d: 'AutoCAD'
+                },
+                q3: {
+                    a: 'Computer System Validation',
+                    b: 'Comma Separated Values',
+                    c: 'Cyber Security Verification',
+                    d: 'Corporate Server Volume'
+                },
+                q4: {
+                    a: 'Categorical data',
+                    b: 'Numerical data',
+                    c: 'Text data',
+                    d: 'Binary data'
+                }
+            };
+            
+            submitBtn.addEventListener('click', function() {
+                let score = 0;
+                const userAnswers = {};
+                
+                // Check each question
+                for (let i = 1; i <= 4; i++) {
+                    const questionName = 'q' + i;
+                    const selectedOption = document.querySelector(`input[name=${questionName}]:checked`);
+                    
+                    if (selectedOption) {
+                        userAnswers[questionName] = selectedOption.value;
+                        
+                        if (selectedOption.value === correctAnswers[questionName]) {
+                            score++;
+                        }
+                    } else {
+                        userAnswers[questionName] = null;
+                    }
+                }
+                
+                // Display score with encouraging message
+                let message = `You scored ${score} out of 4. `;
+                if (score === 4) {
+                    message += "Excellent! You have great potential in data analytics!";
+                } else if (score >= 2) {
+                    message += "Good effort! Keep learning and you'll improve quickly.";
+                } else {
+                    message += "Don't worry! Everyone starts somewhere. Check out our beginner resources.";
+                }
+                scoreDiv.textContent = message;
+                
+                // Display user answers with correct/incorrect indicators
+                for (let i = 1; i <= 4; i++) {
+                    const questionName = 'q' + i;
+                    const answerElement = document.getElementById('answer' + i);
+                    
+                    if (userAnswers[questionName]) {
+                        const userAnswerText = answerTexts[questionName][userAnswers[questionName]];
+                        
+                        if (userAnswers[questionName] === correctAnswers[questionName]) {
+                            answerElement.innerHTML = `Your answer: <span class="correct">${userAnswerText}</span>`;
+                        } else {
+                            answerElement.innerHTML = `Your answer: <span class="incorrect">${userAnswerText}</span>`;
+                        }
+                    } else {
+                        answerElement.innerHTML = 'Your answer: <span class="incorrect">Not answered</span>';
+                    }
+                }
+                
+                // Show results
+                resultsDiv.style.display = 'block';
+                
+                // Scroll to results
+                resultsDiv.scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // Add selection effects to options
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => {
+                // Change style when selected
+                const radio = option.querySelector('input[type="radio"]');
+                radio.addEventListener('change', function() {
+                    // Remove selected class from all options in this question
+                    const question = this.closest('.question');
+                    question.querySelectorAll('.option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    
+                    // Add selected class to the parent option
+                    if (this.checked) {
+                        this.parentElement.classList.add('selected');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
